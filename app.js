@@ -1,5 +1,4 @@
 import puppeteer from "puppeteer-core";
-import accessToken from "./config.json" assert {type : "json"}
 
 
 const startBrowser = async (accessToken) => {
@@ -73,7 +72,12 @@ const startBrowser = async (accessToken) => {
 const main = async () => {
     while(true){
         try {
-            await startBrowser(accessToken.accessToken);
+            const accessToken = process.env.acess_token
+            if (!accessToken) {
+                console.error('Access token is not set in environment variables.');
+                process.exit(1);
+            }
+            await startBrowser(accessToken);
             await new Promise(resolve => setTimeout(resolve, 60000));
         } catch (error) {
             console.error('Error starting browser:', error);
