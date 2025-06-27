@@ -10,8 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "playwright": "^1.53.1",
-    "puppeteer-core": "^24.10.2",
-    "selenium-webdriver": "^4.33.0"
+    "puppeteer-core": "^24.10.2"
   }
 }
