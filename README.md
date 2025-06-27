@@ -22,17 +22,23 @@ Set this as an environment variable named `acess_token` (note the spelling).
 You can use the prebuilt image:  
 [`docker.io/pranavkdileep/onproverorochi:latest`](https://hub.docker.com/r/pranavkdileep/onproverorochi)
 
-```sh
-screen -S onproverorochi
-```
 
 ```sh
-docker run -it -e acess_token="YOUR_ACCESS_TOKEN_HERE" docker.io/pranavkdileep/onproverorochi:latest
+docker run -name onprover -e acess_token="YOUR_ACCESS_TOKEN_HERE" docker.io/pranavkdileep/onproverorochi:latest
 ```
-To access the screen, use:
+To See Logs
 
 ```sh
-screen -r onproverorochi
+docker logs --tail 100 -f onprover
+```
+To Stop the Container
+
+```sh
+docker stop onprover
+```
+To Remove the Container
+```sh
+docker docker container rm -f onprover
 ```
 
 ---
