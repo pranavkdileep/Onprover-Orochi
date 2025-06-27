@@ -24,7 +24,7 @@ You can use the prebuilt image:
 
 
 ```sh
-docker run -name onprover -e acess_token="YOUR_ACCESS_TOKEN_HERE" docker.io/pranavkdileep/onproverorochi:latest
+docker run --name onprover -e acess_token="YOUR_ACCESS_TOKEN_HERE" docker.io/pranavkdileep/onproverorochi:latest
 ```
 To See Logs
 
