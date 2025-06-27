@@ -23,7 +23,16 @@ You can use the prebuilt image:
 [`docker.io/pranavkdileep/onproverorochi:latest`](https://hub.docker.com/r/pranavkdileep/onproverorochi)
 
 ```sh
-docker run -e acess_token="YOUR_ACCESS_TOKEN_HERE" docker.io/pranavkdileep/onproverorochi:latest
+screen -S onproverorochi
+```
+
+```sh
+docker run -it -e acess_token="YOUR_ACCESS_TOKEN_HERE" docker.io/pranavkdileep/onproverorochi:latest
+```
+To access the screen, use:
+
+```sh
+screen -r onproverorochi
 ```
 
 ---
