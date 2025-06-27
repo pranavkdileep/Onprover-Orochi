@@ -10,8 +10,8 @@ Automate interactions with [onprover.orochi.network](https://onprover.orochi.net
 
 Before running, you **must** obtain your personal `accessToken` from [onprover.orochi.network](https://onprover.orochi.network/).  
 Set this as an environment variable named `acess_token` (note the spelling).
+![Screenshot from 2025-06-27 12-08-43](https://github.com/user-attachments/assets/354bcf83-d96d-4a52-b7de-9fb37df97890)
 
-scre
 
 ---
 
