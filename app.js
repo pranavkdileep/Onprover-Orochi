@@ -83,7 +83,7 @@ const startBrowser = async (accessToken) => {
 const main = async () => {
     while(true){
         try {
-            const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiYWFjNGZmMmYtNWYwMC00MDFlLTg4NDktMTdkYzgwZDUxNzU2IiwidXNlcm5hbWUiOiIweDJmMThmMzZhZjg1NzQ1NWVjNjE2MzNjNjVjYjJmMmNlYWI2YmZiZTYiLCJpZCI6IjI5NTYwNSIsImJhblVudGlsIjpudWxsLCJzaWQiOiI4ZTg1Y2MyNC0wM2MwLTRhMzEtOTk3MC04YmNlZmU2YzhmMDQiLCJleHAiOjE3NTcxNjgxNDV9.IxxNInlOT7YJ3cRDDtOSy65hqHmwpLF_CGEJAL9npyM';
+            const accessToken = process.env.ON_PROVER_ACCESS_TOKEN;
             if (!accessToken) {
                 console.error('Access token is not set in environment variables.');
                 process.exit(1);
