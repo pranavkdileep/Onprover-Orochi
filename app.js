@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 const startBrowser = async (accessToken) => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--disable-web-security',
             '--no-sandbox',
