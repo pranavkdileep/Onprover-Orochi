@@ -10,6 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer-core": "^24.10.2"
+    "axios": "^1.10.0",
+    "base64-js": "^1.5.1",
+    "express": "^5.1.0",
+    "puppeteer": "^24.16.0",
+    "puppeteer-core": "^24.10.2",
+    "selenium-webdriver": "^4.33.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "playwright": "^1.53.1"
   }
 }

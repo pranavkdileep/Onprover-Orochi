@@ -1,17 +1,27 @@
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
+import express from "express";
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+let proofNumber = 0;
+let onearnedg = 0;
+let running = false;
+
+app.get('/', (req, res) => {
+    res.send(`Proof Number: ${proofNumber}, On Earned: ${onearnedg}`);
+});
 
 
 const startBrowser = async (accessToken) => {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: [
             '--disable-web-security',
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-gpu'
-        ],
-        executablePath: '/usr/bin/chromium',
+        ]
     });
     try {
         const page = await browser.newPage();
@@ -30,14 +40,15 @@ const startBrowser = async (accessToken) => {
         await new Promise(resolve => setTimeout(resolve, 5000));
         console.log("button clicked, waiting for 5 seconds")
         const proofnumbertext = 'xpath=//*[@id="root"]/div/div/div/main/div/div/div[1]/div[1]/div[2]/div/div[3]/p[1]'
-        let proofNumber = 0;
+        
         let round = 0;
-        const maxRounds = 3;
+        const maxRounds = 300;
         let startTime = Date.now();
         while (round < maxRounds) {
             //await page.waitForSelector(proofnumbertext);
             const proofNumberText = await page.$eval(proofnumbertext, el => el.textContent);
             const onearned = await page.$eval('xpath=//*[@id="root"]/div/div/div/main/div/div/div[1]/div[1]/div[2]/div/div[1]/p[1]/span[1]', el => el.textContent);
+            onearnedg = onearned;
             const loggingTimeutc = new Date().toISOString();
             console.log(`Proof Number: ${proofNumberText}, On Earned: ${onearned}, Logging Time (UTC): ${loggingTimeutc}`);
             proofNumber = parseInt(proofNumberText);
@@ -72,7 +83,7 @@ const startBrowser = async (accessToken) => {
 const main = async () => {
     while(true){
         try {
-            const accessToken = process.env.acess_token
+            const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiYWFjNGZmMmYtNWYwMC00MDFlLTg4NDktMTdkYzgwZDUxNzU2IiwidXNlcm5hbWUiOiIweDJmMThmMzZhZjg1NzQ1NWVjNjE2MzNjNjVjYjJmMmNlYWI2YmZiZTYiLCJpZCI6IjI5NTYwNSIsImJhblVudGlsIjpudWxsLCJzaWQiOiI4ZTg1Y2MyNC0wM2MwLTRhMzEtOTk3MC04YmNlZmU2YzhmMDQiLCJleHAiOjE3NTcxNjgxNDV9.IxxNInlOT7YJ3cRDDtOSy65hqHmwpLF_CGEJAL9npyM';
             if (!accessToken) {
                 console.error('Access token is not set in environment variables.');
                 process.exit(1);
@@ -85,4 +96,19 @@ const main = async () => {
     }
 }
 
-main()
+app.get('/start', async (req, res) => {
+    if (running) {
+        return res.status(400).send('Browser is already running');
+    }
+    running = true;
+    console.log("Starting browser...");
+    main().catch(error => {
+        console.error('Error in main function:', error);
+        running = false;
+    });
+    res.send('Browser started and running');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
